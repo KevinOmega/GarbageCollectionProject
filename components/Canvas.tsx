@@ -3,7 +3,7 @@ import canvas from "./canvas.module.scss";
 import Path from './Path';
 
 const properties = {
-    id : 1,length : 20,traffic : "high",direcction : "forwards", rotation : 90,to :[2] 
+    id : 1,position : {xs : 0, ys : 0 , xe : 1, ye : 5},traffic : "high",direcction : "forwards",
 }
 
 const Canvas = () => {
@@ -43,7 +43,7 @@ const Canvas = () => {
 
   return (
     <div ref={canvasRef} className={canvas.canvas}  >
-      <Path {...properties} />
+      <Path {...properties} unitSize={unitSize}/>
       {lines.map((l,index) => <div key={index} className={canvas.verticalLine} style={{left : l}}></div>)}
       {lines.map((l,index) => <div key={index * 10}className={canvas.horizontalLine} style={{top : l}}></div>)}
     </div>

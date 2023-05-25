@@ -5,18 +5,20 @@ import path from "./Path.module.css";
 
 
 const Path = ({
-    id,length,traffic,direcction, rotation,to} :
+    id,position,traffic, direcction,unitSize} :
     {
         id : number, 
-        length : number,
+        position : {xs : number, ys : number, xe : number,ye : number}
         traffic : string,
         direcction : string,
-        rotation : number; 
-        to : number[]
-    }) => {
+        unitSize : number;
+      }) => {
   return (
-    <div className={path.path} style={{transform : `rotate(${rotation}deg)`, width : `${10 * length}px`}}>
-      <div className={path.line}></div>
+    <div className={path.path} style={ {
+      width : `${ (unitSize * (position.xe - position.xs))}px`,
+      height : `${ (unitSize * (position.ye - position.ys))}px`,
+      }}>
+      {/* <div className={path.line}></div> */}
     </div>
   )
 }
