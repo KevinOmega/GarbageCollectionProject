@@ -1,0 +1,17 @@
+.path {
+  position: relative;
+  background-color: #b4b4b4;
+  border-top: 2px solid yellow;
+  border-bottom: 2px solid yellow;
+  height: 3rem;
+  transform-origin: 0 90%;
+  display: flex;
+  align-items: center;
+  top: 0;
+  left: 0;
+}
+.line {
+  height: 1px;
+  width: 100%;
+  background-color: white;
+}
