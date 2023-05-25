@@ -9,27 +9,43 @@ const properties = {
 const Canvas = () => {
     const canvasRef : any = useRef();
     const [lines,setLines] = useState<number[]>([])
+    const [unitSize,setUnitSize] = useState<number>(0);
+    const numberOfRows = 15;
 
     const generateLines  = (n : number) => {
-        const canvasWidth = canvasRef.current.getBoundingClientRect().width;
-        const canvasHeigth =  canvasRef.current.getBoundingClientRect().height;
         let currentLines = [];
-        let unit = canvasWidth / n;
         for (let i = 0; i < n; i++) {
-            currentLines.push( i * unit);
+            currentLines.push( i * unitSize);
         }
         setLines(currentLines);
     }
 
+    const getUnitSize = (n : number) => {
+          const canvasWidth = canvasRef.current.getBoundingClientRect().width;
+          setUnitSize(canvasWidth / n);
+    }
+
     useEffect(() => {
-        console.log(generateLines(15));
+        const handleResize = () => {
+          getUnitSize(numberOfRows);
+        }
+
+        window.addEventListener("resize",handleResize);
+
+        handleResize();
+
+        return () => window.removeEventListener("resize",handleResize)
     },[])
+
+    useEffect(() => {
+      generateLines(numberOfRows);
+    },[unitSize])
 
   return (
     <div ref={canvasRef} className={canvas.canvas}  >
       <Path {...properties} />
-      {lines.map((l,index) => <div className={canvas.verticalLine} style={{left : l}}></div>)}
-      {lines.map((l,index) => <div className={canvas.horizontalLine} style={{top : l}}></div>)}
+      {lines.map((l,index) => <div key={index} className={canvas.verticalLine} style={{left : l}}></div>)}
+      {lines.map((l,index) => <div key={index * 10}className={canvas.horizontalLine} style={{top : l}}></div>)}
     </div>
   )
 }
