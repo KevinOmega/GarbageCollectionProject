@@ -1,14 +1,10 @@
 .path {
-  position: relative;
-  background-color: #b4b4b4;
-  border-top: 2px solid yellow;
-  border-bottom: 2px solid yellow;
-  height: 3rem;
-  transform-origin: 0 90%;
+  position: absolute;
+  background-color: #eaeaea;
+  transform-origin: 0 0;
   display: flex;
   align-items: center;
-  top: 0;
-  left: 0;
+  transition: 1s;
 }
 .line {
   height: 1px;

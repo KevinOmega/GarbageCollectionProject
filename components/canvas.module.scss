@@ -1,26 +1,30 @@
 $dark-color : #340544;
+$line-bread : 0.08px;
+
+.canvasContainer{
+  display: flex;
+}
 
 .canvas {
   position: relative;
   width: min(80vh, 80vw);
   aspect-ratio: 1 / 1;
-  background-color: #fff;
-  // border: 2px solid black;
-  border-bottom: 0.5px solid $dark-color;
-  border-right: 0.5px solid $dark-color;
+  background-color: #ccc;
+  border-bottom: $line-bread solid $dark-color;
+  border-right: $line-bread solid $dark-color;
 }
 .verticalLine {
   position: absolute;
   top: 0;
   height: 100%;
-  width: 0.5px;
+  width: $line-bread;
   background-color: $dark-color;
 }
 
 .horizontalLine {
   position: absolute;
   left: 0;
-  height: 0.5px;
+  height: $line-bread;
   width: 100%;
   background-color: $dark-color;
 }
