@@ -3,11 +3,6 @@ import canvas from "./canvas.module.scss";
 import Path from './Path';
 import Corner from './Corner';
 
-// const properties = {
-//     id : 1,position : {xs : 0, ys : 0 , xe : 1, ye : 5},traffic : "high",direcction : "forwards",
-// }
-
-
 
 const Canvas = () => {
     const canvasRef : any = useRef();
@@ -115,24 +110,6 @@ const Canvas = () => {
     },[unitSize])
 
   return (
-    <div className={canvas.canvasContainer}>
-      <form>
-        <div className="input-item">
-          <label htmlFor="">initial position</label>
-          <div className="inputs">
-            <input type="number" placeholder='x' value={xs} onChange={(e) => setXs(Number(e.target.value))} required/>
-            <input type="number" placeholder='y' value={ys} onChange={(e) => setYs(Number(e.target.value))} required/>
-          </div>
-        </div>
-        <div className="input-item">
-          <label htmlFor="">final position</label>
-          <div className="inputs">
-          <input type="number" placeholder='x ' value={xe} onChange={(e) => setXe(Number(e.target.value))} required/>
-          <input type="number" placeholder='y' value={ye} onChange={(e) => setYe(Number(e.target.value))} required/>
-          </div>
-        </div>
-        <button onClick={onSubmit} className='primary-button'>GeneratePath</button>
-      </form>
     <div ref={canvasRef} className={canvas.canvas}  >
       {lines.map((l,index) => <div key={index} className={canvas.verticalLine} style={{left : l}}></div>)}
       {lines.map((l,index) => <div key={index * 10}className={canvas.horizontalLine} style={{top : l}}></div>)}
@@ -142,11 +119,8 @@ const Canvas = () => {
             c1: number // const properties = {
             ; c2: number;
           }; length:
-          //     id : 1,position : {xs : 0, ys : 0 , xe : 1, ye : 5},traffic : "high",direcction : "forwards",
-          // }
           number;
         }) => <Path key={p.id}{...p}/>)}
-    </div>
     </div>
   )
 }
