@@ -1,12 +1,13 @@
 import React from 'react'
 import Canvas from '../components/Canvas'
 import Navbar from '../components/Navbar'
+import Home from '../components/Home'
 
 const index = () => {
   return (
     <div>
       <Navbar/>
-      Hello World
+      <Home/>
       <Canvas/>
     </div>
   )

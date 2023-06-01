@@ -1,0 +1,55 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-size: 20px;
+  overflow-x: hidden;
+}
+
+.primary-button {
+  background-color: #1b6bce;
+  border: none;
+  color: white;
+  padding: 0.75rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+}
+
+#Home {
+  position: relative;
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  .image-container{
+    width: 50vw;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    .image{
+      height: 30rem;
+      width: 35rem;
+      background-image: url("../public/images/garbageTruck.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      border-radius: 20px;
+    }
+  }
+  .description{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    p{
+      text-align: center;
+      width: 60%;
+    }
+  }
+}
