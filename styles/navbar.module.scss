@@ -1,0 +1,32 @@
+$spacing : min(6rem, 5vw);
+
+.navbar {
+  background-color: #0d6efd;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 0;
+  width: 100vw;
+}
+
+.links {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  margin-right: $spacing;
+  gap: $spacing;
+}
+
+.links li {
+  list-style: none;
+}
+
+.links li a {
+  text-decoration: none;
+  color: white;
+}
+
+.logo {
+  margin-left: $spacing;
+}
