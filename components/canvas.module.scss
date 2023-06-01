@@ -1,17 +1,14 @@
 $dark-color : #340544;
 $line-bread : 0.08px;
 
-.canvasContainer{
-  display: flex;
-}
-
 .canvas {
   position: relative;
   width: min(80vh, 80vw);
   aspect-ratio: 1 / 1;
-  background-color: #ccc;
+  background-color: #eee;
   border-bottom: $line-bread solid $dark-color;
   border-right: $line-bread solid $dark-color;
+  border: 10px solid $dark-color;
 }
 .verticalLine {
   position: absolute;

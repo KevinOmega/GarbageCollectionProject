@@ -1,13 +1,14 @@
 import React from 'react'
 import Canvas from './Canvas'
+import ControlPanel from './ControlPanel'
 
 const Projects = () => {
   return (
     <section id='Project'>
       <div className="title">
         <h3>Garbage Collector</h3>
-        <div className="project-container">
-          <div className="control-panel"></div>
+        <div className="project-center">
+          <ControlPanel/>
           <Canvas/>
         </div>
       </div>
