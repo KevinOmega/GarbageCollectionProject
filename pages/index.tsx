@@ -1,5 +1,4 @@
 import React, { StrictMode } from 'react'
-import Canvas from '../components/Canvas'
 import Navbar from '../components/Navbar'
 import Home from '../components/Home'
 import Project from '../components/Project'

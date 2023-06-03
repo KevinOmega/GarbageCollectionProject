@@ -2,13 +2,15 @@ import React, { LegacyRef, useEffect, useRef, useState } from 'react'
 import canvas from "./canvas.module.scss";
 import Path from './Path';
 import Corner from './Corner';
+import { useGlobalContext } from '../context/context';
 
 
 const Canvas = () => {
+
+    const {unitSize,setUnitSize,numberOfRows,graph,setGraph} = useGlobalContext();
+
     const canvasRef : any = useRef();
     const [lines,setLines] = useState<number[]>([])
-    const [unitSize,setUnitSize] = useState<number>(0);
-    const numberOfRows = 31;
     const [paths, setPaths] = useState<any>([]);
     const [corners, setCorners] = useState<any>([]);
     const [xs,setXs] = useState<number>(0);
@@ -16,7 +18,7 @@ const Canvas = () => {
     const [ys,setYs] = useState<number>(0);
     const [ye,setYe] = useState<number>(0);
 
-    const graph : any = {};
+    // const graph : any = {};
 
     const generateLines  = (n : number) => {
         let currentLines = [];
@@ -56,26 +58,32 @@ const Canvas = () => {
       const id2 = xe.toString() + ye.toString();
       const streetID = xs.toString() + ys.toString() + xe.toString() + ye.toString();
       const pathLength = Math.max(xe- xs, ye - ys);
+
+      const array1 = graph[id1] !== undefined ? graph[id1] : [];
+      const array2 = graph[id2] !== undefined ? graph[id2] : [];
         if(graph[id1] === undefined){
-          console.log(id1);
-          graph[id1] = [];
-          setCorners((current : any) => [
-            ...current,
-            {id : id1, unitSize : unitSize, position : {x : xs, y : ys}},
-          ])
+          // setCorners((current : any) => [
+          //   ...current,
+          //   {id : id1, unitSize : unitSize, position : {x : xs, y : ys}},
+          // ])
         }
         if(graph[id2] === undefined){
-          console.log(id2 , "id2");
-          graph[id2] = [];
-           setCorners((current : any) => [
-            ...current,
-            {id : id2, unitSize : unitSize, position : {x : xe, y : ye}},
-          ])
+          //  setCorners((current : any) => [
+          //   ...current,
+          //   {id : id2, unitSize : unitSize, position : {x : xe, y : ye}},
+          // ])
         }
       
-
-      graph[id1].push({length : pathLength, time : pathLength * 10, to : id2})
-      graph[id2].push({length : pathLength, time :  pathLength * 10, to : id1});
+        setGraph((currentGraph : any) => {
+          return {
+            ...currentGraph, 
+            [id1] : [...array1,{streetID, time : pathLength * 10, to : id2}],
+            [id2] : [...array2,{streetID, time : pathLength * 10, to : id1}],
+          }
+        } )
+      
+      // graph[id1].push({length : pathLength, time : pathLength * 10, to : id2})
+      // graph[id2].push({length : pathLength, time :  pathLength * 10, to : id1});
      
         let rotation = 0;
         let length = Math.abs(xe - xs);
@@ -84,10 +92,10 @@ const Canvas = () => {
         rotation = 90;
         length = Math.abs(ye - ys);
       }
-      setPaths( (current : any) => [
-        ...current,
-        {id : streetID, position : {x : xs, y : ys}, rotation, unitSize : unitSize, length : length - 1 }
-      ])
+      // setPaths( (current : any) => [
+      //   ...current,
+      //   {id : streetID, position : {x : xs, y : ys}, rotation, unitSize : unitSize, length : length - 1 }
+      // ])
     }
 
     useEffect(() => {
@@ -102,7 +110,7 @@ const Canvas = () => {
     },[])
 
     useEffect(() => {
-      console.log(corners);
+      generateMap()
     },[])
 
     useEffect(() => {
