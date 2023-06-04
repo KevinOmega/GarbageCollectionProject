@@ -9,6 +9,7 @@ $line-bread : 0.08px;
   border-bottom: $line-bread solid $dark-color;
   border-right: $line-bread solid $dark-color;
   border: 10px solid $dark-color;
+  overflow: hidden;
 }
 .verticalLine {
   position: absolute;

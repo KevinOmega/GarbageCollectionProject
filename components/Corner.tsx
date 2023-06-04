@@ -1,24 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import corner from "./cormer.module.css";
+import { useGlobalContext } from '../context/context';
+import { userAgent } from 'next/server';
 
 
-interface nodeStructure {
-  to : string,
-  time : number,
-  length : number,
-}
 
-interface pathStructure  {
-    up : nodeStructure,
-    left : nodeStructure,
-    right : nodeStructure,
-    top : nodeStructure,
-}
+const Corner = ({id} : {id : string}) => {
+  const {unitSize} = useGlobalContext();
 
-const Corner = ({id,unitSize, position} : {unitSize : number, id : "string" , position : {x : number, y : number}}) => {
+  const position : string[] = id.split(",");
+
+
   return (
-    <div className={corner.corner} style={{width : unitSize, height : unitSize, top : position.y * unitSize, left : position.x * unitSize}}>
-      
+    <div className={corner.corner} style={
+      {width : unitSize, 
+      height : unitSize, 
+      top : Number(position[1]) * unitSize, 
+      left : Number(position[0]) * unitSize
+      }}>   
     </div>
   )
 }

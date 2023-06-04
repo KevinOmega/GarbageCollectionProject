@@ -1,28 +1,29 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import path from "./Path.module.css";
+import { useGlobalContext } from '../context/context';
 
 
 
 
-const Path = ({
-    id,position,traffic = "low", direcction = "double", rotation ,unitSize, length} :
-    {
-        id : number, 
-        position : {x : number, y : number}
-        traffic : string,
-        direcction : string,
-        rotation : number,
-        unitSize : number;
-        corners : {c1 : number, c2 : number};
-        length : number
-      }) => {
+const Path = ({ id } : { id : string }) => {
+  const {unitSize} = useGlobalContext();
+
+  const position : number[]= id.split(",").map((s) => Number(s));
+
+  let length = Math.max(position[2] - position[0], position[3] - position[1]);
+  let rotation = 0;
+
+  if(position[1] === position[3]){
+    rotation = 90;
+  }
+  
   return (
     <div key={id}  className={path.path} style={ {
-      width : `${ (unitSize * length)}px`,
+      width : `${ (unitSize * (length - 1))}px`,
       height : `${unitSize}px`,
-      top : position.y * unitSize,
-      left :  position.x * unitSize,
-      transform : `rotate(${rotation}deg) translate(${unitSize}px, ${rotation === 0 ? 0 : unitSize * -1}px)`,
+      top : position[1] * unitSize,
+      left :  position[0] * unitSize,
+      transform : `rotate(${rotation}deg) translate(${unitSize}px ,${rotation === 90 ? -unitSize : 0}px)`,
       }}>
       {/* <div className={path.line}></div> */}
     </div>
