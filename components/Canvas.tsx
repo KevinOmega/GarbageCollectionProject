@@ -9,7 +9,7 @@ import path from 'path';
 const Canvas = () => {
 
 
-    const {unitSize,setUnitSize,numberOfRows,corners,paths} = useGlobalContext();
+    const {unitSize,setUnitSize,numberOfRows,corners,paths,generateMap} = useGlobalContext();
 
     const canvasRef : any = useRef();
     const [lines,setLines] = useState<number[]>([])
@@ -40,14 +40,15 @@ const Canvas = () => {
 
     useEffect(() => {
       generateLines(numberOfRows);
+      generateMap();
     },[unitSize])
 
   return (
     <div ref={canvasRef} className={canvas.canvas}  >
-      {lines.map((l,index) => <div key={index} className={canvas.verticalLine} style={{left : l}}></div>)}
-      {lines.map((l,index) => <div key={index * 10}className={canvas.horizontalLine} style={{top : l}}></div>)}
-      {corners.map((cornerID: string) => <Corner id = {cornerID}/>)}
-      {Object.keys(paths).map((v) => <Path id={v}/>)}
+      {/* {lines.map((l,index) => <div key={index} className={canvas.verticalLine} style={{left : l}}></div>)}
+      {lines.map((l,index) => <div key={index * 10}className={canvas.horizontalLine} style={{top : l}}></div>)} */}
+      {corners.map((cornerID: string) => <Corner id = {cornerID} key={cornerID}/>)}
+      {Object.keys(paths).map((v) => <Path id={v} key={v}/>)}
     </div>
   )
 }

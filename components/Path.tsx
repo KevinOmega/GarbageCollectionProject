@@ -14,7 +14,7 @@ const Path = ({ id } : { id : string }) => {
   let rotation = 0;
 
   if(position[1] === position[3]){
-    rotation = 90;
+    rotation = 270;
   }
   
   return (
@@ -23,9 +23,10 @@ const Path = ({ id } : { id : string }) => {
       height : `${unitSize}px`,
       top : position[1] * unitSize,
       left :  position[0] * unitSize,
-      transform : `rotate(${rotation}deg) translate(${unitSize}px ,${rotation === 90 ? -unitSize : 0}px)`,
+      transform : `rotate(${rotation}deg) translateX(${!rotation ? unitSize : 0}px)`,
+      
       }}>
-      {/* <div className={path.line}></div> */}
+        <p>{position.join("")}</p>
     </div>
   )
 }

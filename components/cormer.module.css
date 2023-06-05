@@ -2,3 +2,7 @@
   position: absolute;
   background-color: white;
 }
+
+.corner p {
+  font-size: 0.5rem;
+}

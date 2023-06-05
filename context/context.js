@@ -5,14 +5,14 @@ const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
   const [unitSize, setUnitSize] = useState(0);
   const [graph, setGraph] = useState({});
-  const paths = {};
-  const corners = [];
+  const [paths, setPaths] = useState({});
+  const [corners, setCorners] = useState([]);
 
-  const numberOfRows = 32;
+  const numberOfRows = 33;
 
   const generateMap = () => {
-    for (let i = 0; i < 6; i++) {
-      for (let j = 0; j < 7; j++) {
+    for (let i = 0; i <= 7; i++) {
+      for (let j = 0; j < +7; j++) {
         generatePath(i * 5, j * 5, i * 5, (j + 1) * 5);
         generatePath(j * 5, i * 5, (j + 1) * 5, i * 5);
       }
@@ -21,7 +21,7 @@ const AppProvider = ({ children }) => {
   };
 
   const generatePath = (xs, ys, xe, ye) => {
-    if (xe <= 30 || ye <= 30) {
+    if (ye <= 35) {
       const id1 = xs.toString() + "," + ys.toString();
       const id2 = xe.toString() + "," + ye.toString();
       const streetID =
@@ -48,6 +48,8 @@ const AppProvider = ({ children }) => {
   };
 
   const drawPaths = () => {
+    const currentCorners = [];
+    const currentPaths = {};
     Object.entries(graph).map((key) => {
       corners.push(key[0]);
       if (key[1]) {
@@ -60,9 +62,9 @@ const AppProvider = ({ children }) => {
     });
   };
 
-  useEffect(() => {
-    generateMap();
-  }, []);
+  // useEffect(() => {
+  //   generateMap();
+  // }, []);
 
   useEffect(() => {
     drawPaths();
@@ -79,6 +81,7 @@ const AppProvider = ({ children }) => {
         setGraph,
         corners,
         paths,
+        generateMap,
       }}
     >
       {children}

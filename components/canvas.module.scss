@@ -3,12 +3,10 @@ $line-bread : 0.08px;
 
 .canvas {
   position: relative;
-  width: min(80vh, 80vw);
+  width: min(81vh, 81vw);
   aspect-ratio: 1 / 1;
   background-color: #eee;
-  border-bottom: $line-bread solid $dark-color;
-  border-right: $line-bread solid $dark-color;
-  border: 10px solid $dark-color;
+  border: 20px solid #eee;
   overflow: hidden;
 }
 .verticalLine {
