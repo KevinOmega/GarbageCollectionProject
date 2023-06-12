@@ -45,8 +45,8 @@ const Canvas = () => {
 
   return (
     <div ref={canvasRef} className={canvas.canvas}  >
-      {/* {lines.map((l,index) => <div key={index} className={canvas.verticalLine} style={{left : l}}></div>)}
-      {lines.map((l,index) => <div key={index * 10}className={canvas.horizontalLine} style={{top : l}}></div>)} */}
+      {lines.map((l,index) => <div key={index} className={canvas.verticalLine} style={{left : l}}></div>)}
+      {lines.map((l,index) => <div key={index * 10}className={canvas.horizontalLine} style={{top : l}}></div>)}
       {corners.map((cornerID: string) => <Corner id = {cornerID} key={cornerID}/>)}
       {Object.keys(paths).map((v) => <Path id={v} key={v}/>)}
     </div>

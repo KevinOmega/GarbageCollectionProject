@@ -9,7 +9,9 @@ const Projects = () => {
         <h3>Garbage Collector</h3>
         <div className="project-center">
           <ControlPanel/>
-          <Canvas/>
+          <div className="canvas-container">
+            <Canvas/>
+          </div>
         </div>
       </div>
     </section>

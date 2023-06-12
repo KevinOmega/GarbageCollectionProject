@@ -18,6 +18,7 @@ const Corner = ({id} : {id : string}) => {
       top : Number(position[1]) * unitSize, 
       left : Number(position[0]) * unitSize
       }}>   
+      <p>{id}</p>
     </div>
   )
 }

@@ -7,12 +7,14 @@ const AppProvider = ({ children }) => {
   const [graph, setGraph] = useState({});
   const [paths, setPaths] = useState({});
   const [corners, setCorners] = useState([]);
+  const [collectionPoints, setCollectionPoints] = useState([]);
+  const [collectionCenter, setCollectionCenter] = useState();
 
-  const numberOfRows = 33;
+  const numberOfRows = 31;
 
   const generateMap = () => {
-    for (let i = 0; i <= 7; i++) {
-      for (let j = 0; j < +7; j++) {
+    for (let i = 0; i <= numberOfRows / 6 + 1; i++) {
+      for (let j = 0; j < numberOfRows / 6; j++) {
         generatePath(i * 5, j * 5, i * 5, (j + 1) * 5);
         generatePath(j * 5, i * 5, (j + 1) * 5, i * 5);
       }
@@ -26,18 +28,17 @@ const AppProvider = ({ children }) => {
       const id2 = xe.toString() + "," + ye.toString();
       const streetID =
         xs.toString() +
-        "," +
+        "-" +
         ys.toString() +
-        "," +
+        "-" +
         xe.toString() +
-        "," +
+        "-" +
         ye.toString();
       const pathLength = Math.max(xe - xs, ye - ys);
 
       setGraph((currentGraph) => {
         const array1 = currentGraph[id1] !== undefined ? currentGraph[id1] : [];
         const array2 = currentGraph[id2] !== undefined ? currentGraph[id2] : [];
-        console.log(array1);
         return {
           ...currentGraph,
           [id1]: [...array1, { streetID, time: pathLength * 10, to: id2 }],
@@ -48,8 +49,6 @@ const AppProvider = ({ children }) => {
   };
 
   const drawPaths = () => {
-    const currentCorners = [];
-    const currentPaths = {};
     Object.entries(graph).map((key) => {
       corners.push(key[0]);
       if (key[1]) {
@@ -62,13 +61,16 @@ const AppProvider = ({ children }) => {
     });
   };
 
-  // useEffect(() => {
-  //   generateMap();
-  // }, []);
+  const addCollectionCenter = (streetID) => {
+    const streetNodes = streetID.split("-");
+    const node1 = streetNodes[0] + "-" + streetNodes[1];
+    const node2 = streetNodes[2] + "-" + streetNodes[3];
+    console.log(node1, node2);
+  };
 
   useEffect(() => {
     drawPaths();
-    console.log(graph);
+    addCollectionCenter("0-0-5-0");
   }, [graph]);
 
   return (

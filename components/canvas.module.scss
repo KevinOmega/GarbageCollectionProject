@@ -1,13 +1,16 @@
 $dark-color : #340544;
 $line-bread : 0.08px;
 
+
 .canvas {
   position: relative;
   width: min(81vh, 81vw);
   aspect-ratio: 1 / 1;
   background-color: #eee;
-  border: 20px solid #eee;
-  overflow: hidden;
+  margin: 0 2rem;
+  box-sizing: content-box;
+  // border: 20px solid #eee;
+  // overflow: hidden;
 }
 .verticalLine {
   position: absolute;

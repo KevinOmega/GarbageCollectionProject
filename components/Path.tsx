@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React,{useEffect, useState} from 'react'
 import path from "./Path.module.css";
 import { useGlobalContext } from '../context/context';
 
@@ -7,14 +7,13 @@ import { useGlobalContext } from '../context/context';
 
 const Path = ({ id } : { id : string }) => {
   const {unitSize} = useGlobalContext();
-
-  const position : number[]= id.split(",").map((s) => Number(s));
+  const position : number[]= id.split("-").map((s) => Number(s));
 
   let length = Math.max(position[2] - position[0], position[3] - position[1]);
-  let rotation = 0;
+  let rotation = 90;
 
   if(position[1] === position[3]){
-    rotation = 270;
+    rotation = 0;
   }
   
   return (
@@ -23,10 +22,10 @@ const Path = ({ id } : { id : string }) => {
       height : `${unitSize}px`,
       top : position[1] * unitSize,
       left :  position[0] * unitSize,
-      transform : `rotate(${rotation}deg) translateX(${!rotation ? unitSize : 0}px)`,
+      transform : `rotate(${rotation}deg) translate(${unitSize}px, ${rotation ? -unitSize : 0}px)`,
       
       }}>
-        <p>{position.join("")}</p>
+        <p>{id}</p>
     </div>
   )
 }
