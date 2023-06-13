@@ -4,12 +4,14 @@ import Path from './Path';
 import Corner from './Corner';
 import { useGlobalContext } from '../context/context';
 import path from 'path';
+import CollectionCenter from './CollectionCenter';
+import CollectionPoint from './CollectionPoint';
 
 
 const Canvas = () => {
 
 
-    const {unitSize,setUnitSize,numberOfRows,corners,paths,generateMap} = useGlobalContext();
+    const {unitSize,setUnitSize,numberOfRows,corners,paths,generateMap,collectionPoints,collectionCenter} = useGlobalContext();
 
     const canvasRef : any = useRef();
     const [lines,setLines] = useState<number[]>([])
@@ -49,6 +51,8 @@ const Canvas = () => {
       {lines.map((l,index) => <div key={index * 10}className={canvas.horizontalLine} style={{top : l}}></div>)}
       {corners.map((cornerID: string) => <Corner id = {cornerID} key={cornerID}/>)}
       {Object.keys(paths).map((v) => <Path id={v} key={v}/>)}
+      {collectionPoints.map((cp : any) => <CollectionPoint id={cp.streetID} quantity={cp.quantity}/>)}
+      <CollectionCenter id={collectionCenter}/>
     </div>
   )
 }

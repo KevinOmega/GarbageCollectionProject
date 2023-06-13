@@ -8,7 +8,9 @@ import { userAgent } from 'next/server';
 const Corner = ({id} : {id : string}) => {
   const {unitSize} = useGlobalContext();
 
-  const position : string[] = id.split(",");
+  const position : string[] = id.split("-");
+
+  
 
 
   return (

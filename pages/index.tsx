@@ -7,14 +7,12 @@ import Footer from '../components/Footer';
 
 const index = () => {
   return (
-    <StrictMode>
       <AppProvider>
         <Navbar/>
         <Home/>
         <Project/>
         <Footer/>
       </AppProvider>
-    </StrictMode>
   )
 }
 

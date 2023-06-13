@@ -19,13 +19,20 @@
         justify-content: center;
         align-items: stretch;
 
+        .canvas-container {
+                position: relative;
+                width: fit-content;
+                background-color: #eee;
+                padding: 1.5rem 0;
+            }
+
         .control-panel{
             position: relative;
             background-color: $primary;
             height: 100%;
             color: white;
             padding: 2rem;
-            width: 25%;
+            width: 20%;
 
             &-center{
                 position: relative;
@@ -43,7 +50,33 @@
                         position: relative;
                         display: flex;
                         width: 100%;
-                        button{
+                    }
+
+                    .item-double{
+                        display: flex;
+                        flex-direction: column;
+
+                        .items{
+                            display: grid;
+                            grid-template-columns: 50% 50%;
+                        }
+                        
+                        label{
+                            font-size: 1rem;
+                            margin: 0;
+                            padding: 0;
+                        }
+                        input{
+                            padding: 0.3rem;
+                            margin-bottom: 0.75rem;
+                        }
+
+                        input[type=color]{
+                           height: 100%;
+                        }
+                    
+                    }
+                    button{
                             padding: 0.5rem 1rem;
                             background-color: $success;
                             border: none;
@@ -57,10 +90,52 @@
                                 box-shadow: 0 0 10px 1px #0005;
                             }
                         }
-                        input{
+                    input{
                             padding-left: 0.5rem;
                         }
-                    }
+                }
+            }
+        }
+    }
+
+    .truck-center{
+        width: 100%;
+        position: relative;
+        margin-top: 1rem;
+        min-height: 13rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
+        h4{
+            font-size: 1.5rem;
+        }
+        .truck-item{
+            width: 100%;
+            padding: 0.2rem;
+            background-color: #eee;
+            color: black;
+            border-radius: 15px;
+            h5{
+                font-weight: bold;
+                font-size: 1.2rem;
+                text-transform: uppercase;
+            }
+            .truck-info{
+                margin-top: 0.5rem;
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+
+                p{
+                    font-size: 1rem;
+                }
+
+                button{
+                    background-color: transparent;
+                    border: none;
+                    // color: white;
+                    font-size: 1.2rem;
                 }
             }
         }

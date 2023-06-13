@@ -9,6 +9,8 @@ const Path = ({ id } : { id : string }) => {
   const {unitSize} = useGlobalContext();
   const position : number[]= id.split("-").map((s) => Number(s));
 
+  const {paths} = useGlobalContext();
+
   let length = Math.max(position[2] - position[0], position[3] - position[1]);
   let rotation = 90;
 
@@ -23,7 +25,7 @@ const Path = ({ id } : { id : string }) => {
       top : position[1] * unitSize,
       left :  position[0] * unitSize,
       transform : `rotate(${rotation}deg) translate(${unitSize}px, ${rotation ? -unitSize : 0}px)`,
-      
+      background : `${paths[id].t === 0.5 ? "white": paths[id].t === 1 ? "yellow" : "#ff7700"}`
       }}>
         <p>{id}</p>
     </div>
