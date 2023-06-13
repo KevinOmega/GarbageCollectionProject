@@ -67,7 +67,7 @@ const ControlPanel = () => {
       <div className="truck-center">
         <h4>Truck List</h4>
         {trucks.length ? 
-          trucks.map((t : any) => <TruckItem {...t}/>)
+          trucks.map((t : any) => <TruckItem {...t} key={t.id}/>)
         : <div className='truck-message'>
             <p>No trucks working</p>
           </div>}

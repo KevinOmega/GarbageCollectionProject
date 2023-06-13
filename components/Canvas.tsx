@@ -51,7 +51,7 @@ const Canvas = () => {
       {lines.map((l,index) => <div key={index * 10}className={canvas.horizontalLine} style={{top : l}}></div>)}
       {corners.map((cornerID: string) => <Corner id = {cornerID} key={cornerID}/>)}
       {Object.keys(paths).map((v) => <Path id={v} key={v}/>)}
-      {collectionPoints.map((cp : any) => <CollectionPoint id={cp.streetID} quantity={cp.quantity}/>)}
+      {Object.values(collectionPoints).map((cp : any) => <CollectionPoint key={cp.streetID} id={cp.streetID} quantity={cp.quantity}/>)}
       <CollectionCenter id={collectionCenter}/>
     </div>
   )

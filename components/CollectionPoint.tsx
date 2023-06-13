@@ -9,7 +9,7 @@ const CollectionPoint = ({id, quantity} : {id : string, quantity : number}) => {
 
 
   return (
-    <div className= "collection-point"  key={id} style={
+    <div id={id} className= "collection-point"  key={id} style={
       {
       position : "absolute",  
       width : unitSize, 

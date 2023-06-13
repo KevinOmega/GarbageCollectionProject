@@ -3,7 +3,7 @@ import { BsFillTrashFill } from "react-icons/bs";
 
 const TruckItem = ({ id, quantity, color }) => {
   return (
-    <div className="truck-item">
+    <div className="truck-item" key={id}>
       <h5>Truck : {id}</h5>
       <div className="truck-info">
         <p>Capacity : {quantity}</p>

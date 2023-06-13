@@ -9,7 +9,7 @@ const Footer = () => {
             <h3>Kevin Huayllas</h3>
         </div>
         <ul className="icons">
-            {icons.map(icon => <li><a href={icon.url}><i>{icon.logo}</i><p>{icon.name}</p></a></li>)}
+            {icons.map((icon,index) => <li key={index} ><a href={icon.url}><i>{icon.logo}</i><p>{icon.name}</p></a></li>)}
         </ul>
     </footer>
   )

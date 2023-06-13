@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { PriorityQueue } from "./algorithm";
 
 const AppContext = React.createContext();
 
@@ -7,9 +8,10 @@ const AppProvider = ({ children }) => {
   const [graph, setGraph] = useState({});
   const [paths, setPaths] = useState({});
   const [corners, setCorners] = useState([]);
-  const [collectionPoints, setCollectionPoints] = useState([]);
-  const [collectionCenter, setCollectionCenter] = useState("0-3");
+  const [collectionPoints, setCollectionPoints] = useState({});
+  const [collectionCenter, setCollectionCenter] = useState("0-2");
   const [trucks, setTrucks] = useState([]);
+  const [result, setResult] = useState([]);
 
   const numberOfRows = 31;
 
@@ -69,6 +71,7 @@ const AppProvider = ({ children }) => {
         });
       }
     });
+    moveCollectionCenter("0-10-0-15");
   };
 
   //Collection Center
@@ -173,16 +176,79 @@ const AppProvider = ({ children }) => {
       time: paths[streetID].time / 2,
       to: newNode,
     });
-    setCollectionPoints((currentPoints) => [
-      ...currentPoints,
-      { streetID: newNode, quantity },
-    ]);
+    setCollectionPoints((currentPoints) => {
+      return {
+        ...currentPoints,
+        [newNode]: { streetID: newNode, quantity },
+      };
+    });
   };
 
   //Add trucks
 
   const addTruck = (quantity, color) => {
     setTrucks([...trucks, { id: trucks.length, quantity, color }]);
+  };
+
+  const generatePaths = () => {
+    let head = collectionCenter;
+    const routes = new Array(trucks.length).fill(0).map(() => []);
+    for (let truckIndex = 0; truckIndex < trucks.length; truckIndex++) {
+      let keepGoing = true;
+      while (keepGoing) {
+        const distances = {};
+        const pointDistances = {};
+        distances[head] = 0;
+
+        const heap = new PriorityQueue((a, b) => distances[a] < distances[b]);
+        heap.push(head);
+
+        while (!heap.isEmpty()) {
+          const currentVertex = heap.pop();
+          const neighbors = graph[currentVertex];
+
+          for (let i = 0; i < neighbors.length; i++) {
+            const { streetID, time, to } = neighbors[i];
+            if (
+              distances[to] > distances[currentVertex] + time ||
+              distances[to] === undefined
+            ) {
+              distances[to] = distances[currentVertex] + time;
+              heap.push(to);
+              if (collectionPoints[to] !== undefined) {
+                pointDistances[to] = distances[currentVertex] + time;
+              }
+            }
+          }
+        }
+        let minDistance = Infinity;
+        let point = "0";
+
+        Object.entries(pointDistances).forEach((pair) => {
+          if (
+            pair[1] < minDistance &&
+            trucks[truckIndex].quantity >= collectionPoints[pair[0]].quantity &&
+            collectionPoints[pair[0]].quantity > 0
+          ) {
+            point = pair[0];
+          }
+        });
+        if (point === "0") {
+          console.log("break", routes);
+          break;
+        }
+
+        trucks[truckIndex].quantity =
+          trucks[truckIndex].quantity - collectionPoints[point].quantity;
+
+        collectionPoints[point].quantity = 0;
+
+        routes[truckIndex].push([point, pointDistances[point]]);
+        head = point;
+        // console.log(routes, trucks[truckIndex].quantity);
+      }
+    }
+    setResult(routes);
   };
 
   useEffect(() => {
@@ -207,6 +273,8 @@ const AppProvider = ({ children }) => {
         addRecollectionPoint,
         addTruck,
         trucks,
+        generatePaths,
+        result,
       }}
     >
       {children}
